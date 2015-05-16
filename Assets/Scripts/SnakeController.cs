@@ -16,16 +16,22 @@ public class SnakeController : MonoBehaviour
     Vector2 position;
     public List<SnakeElement> bodyParts;
 
-    // placeholder value for length, might be replaced by bodyParts.Length
     SnakeDirections moveDirection;
     float timerDefault;
-
     SnakeElement SnakeHead;
+
+    // diffrent speedlevels
+    float firstBoost;
+    float secondBoost;
+    float thirdBoost;
+    float fourthBoost;
+    float fifthBoost;
+    float ultraBoost;
 
     public Vector3 spawnVector;
     public float speed;
     public float timerInSeconds = 1;
-
+    public float boostInterval = 50;
 
     public List<SnakeElement> getBodyParts()
     {
@@ -57,6 +63,14 @@ public class SnakeController : MonoBehaviour
         SnakeElement bodyPart1 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y - 1, spawnVector.z));
 
         bodyParts.Add(bodyPart1);
+
+        // assign boostlevels, so they aren't exponentially increased
+        firstBoost = speed * 2;
+        secondBoost = speed * 3;
+        thirdBoost = speed * 4;
+        fourthBoost = speed * 5;
+        fifthBoost = speed * 6;
+        ultraBoost = speed * 7;
     }
 
 
@@ -120,6 +134,33 @@ public class SnakeController : MonoBehaviour
             }
 
             timerInSeconds = timerDefault;
+
+            // check for body length and adjust speed
+            if (bodyParts.Count >= boostInterval * 6)
+            {
+                speed = ultraBoost;
+            }
+            else if (bodyParts.Count >= boostInterval * 5)
+            {
+                speed = fifthBoost;
+            }
+            else if (bodyParts.Count >= boostInterval * 4)
+            {
+                speed = fourthBoost;
+            }
+            else if (bodyParts.Count >= boostInterval * 3)
+            {
+                speed = thirdBoost;
+            }
+            else if (bodyParts.Count >= boostInterval * 2)
+            {
+                speed = secondBoost;
+            }
+            else if (bodyParts.Count >= boostInterval)
+            {
+                speed = firstBoost;
+            }
+
         }
         #endregion
 
