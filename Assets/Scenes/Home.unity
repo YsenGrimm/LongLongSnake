@@ -202,6 +202,8 @@ MonoBehaviour:
   FloorSprite: {fileID: 180692, guid: 440f37f8ddc6743babb2fd6f4e5f1968, type: 2}
   WallSprite: {fileID: 197104, guid: 38e4b4a2e5b8c4a57bfcea4c0a376e56, type: 2}
   MapParent: {fileID: 1867166249}
+  CherrySprite: {fileID: 174996, guid: 961f8e444814e49bab2b2e4ed6e91271, type: 2}
+  AppleSprite: {fileID: 170582, guid: 2ed4e47efee0a4766af7ed5c05c2a01d, type: 2}
 --- !u!4 &864865098
 Transform:
   m_ObjectHideFlags: 0
