@@ -20,20 +20,22 @@ public class SnakeController : MonoBehaviour
     SnakeDirections moveDirection;
     float timerDefault;
 
-	SnakeElement SnakeHead;
+    SnakeElement SnakeHead;
 
-	public Vector3 spawnVector;
+    public Vector3 spawnVector;
     public float speed;
     public float timerInSeconds = 1;
-    
 
-	public List<SnakeElement> getBodyParts() {
-		return bodyParts;
-	}
 
-	public SnakeDirections getMoveDirection() {
-		return moveDirection;
-	}
+    public List<SnakeElement> getBodyParts()
+    {
+        return bodyParts;
+    }
+
+    public SnakeDirections getMoveDirection()
+    {
+        return moveDirection;
+    }
 
     // Use this for initialization
     void Start()
@@ -45,16 +47,18 @@ public class SnakeController : MonoBehaviour
         bodyParts = new List<SnakeElement>();
 
         // spawn head in center of maps
-		SnakeHead = new SnakeElement(spawnVector);
+        SnakeHead = new SnakeElement(spawnVector);
         bodyParts.Add(SnakeHead);
 
         // create first bodypart and add it to list
-		SnakeElement bodyPart0 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y-1, spawnVector.z));
+        SnakeElement bodyPart0 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y + 1, spawnVector.z));
         bodyParts.Add(bodyPart0);
 
-		SnakeElement bodyPart1 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y-1, spawnVector.z));
+        SnakeElement bodyPart1 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y + 1, spawnVector.z));
+
         bodyParts.Add(bodyPart1);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -131,7 +135,7 @@ public class SnakeController : MonoBehaviour
                 moveDirection = SnakeDirections.Right;
             }
         }
-        else if(Input.GetAxis("Vertical") != 0)
+        else if (Input.GetAxis("Vertical") != 0)
         {
             if (Input.GetAxis("Vertical") < 0)
             {
@@ -142,6 +146,27 @@ public class SnakeController : MonoBehaviour
                 moveDirection = SnakeDirections.Up;
             }
         }
+
+    }
+
+    public void Move(int toDirection)
+    {
+        switch (toDirection)
+        {
+            case 0:     // up
+                moveDirection = SnakeDirections.Up;
+                break;
+            case 1:     // down
+                moveDirection = SnakeDirections.Down;
+                break;
+            case 2:     // right
+                moveDirection = SnakeDirections.Right;
+                break;
+            case 3:     // left
+                moveDirection = SnakeDirections.Left;
+                break;
+        }
+
 
     }
 }
