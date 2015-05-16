@@ -49,10 +49,10 @@ public class SnakeController : MonoBehaviour
         bodyParts.Add(SnakeHead);
 
         // create first bodypart and add it to list
-		SnakeElement bodyPart0 = new SnakeElement(spawnVector);
+		SnakeElement bodyPart0 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y+1, spawnVector.z));
         bodyParts.Add(bodyPart0);
 
-		SnakeElement bodyPart1 = new SnakeElement(spawnVector);
+		SnakeElement bodyPart1 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y+1, spawnVector.z));
         bodyParts.Add(bodyPart1);
     }
 

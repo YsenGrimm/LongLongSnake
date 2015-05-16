@@ -205,6 +205,7 @@ MonoBehaviour:
   CherrySprite: {fileID: 174996, guid: 961f8e444814e49bab2b2e4ed6e91271, type: 2}
   AppleSprite: {fileID: 170582, guid: 2ed4e47efee0a4766af7ed5c05c2a01d, type: 2}
   SnakeBody: {fileID: 196154, guid: 75256e27cb72e7f49b9349abbab62780, type: 2}
+  SnakeHead: {fileID: 193734, guid: 69a2fec62a04fad469efacde19740c1b, type: 2}
 --- !u!4 &864865098
 Transform:
   m_ObjectHideFlags: 0
@@ -258,11 +259,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11405880, guid: 14120c70b38304061acbc0b0d6762487, type: 2}
       propertyPath: spawnVector.x
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11405880, guid: 14120c70b38304061acbc0b0d6762487, type: 2}
       propertyPath: spawnVector.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11405880, guid: 14120c70b38304061acbc0b0d6762487, type: 2}
       propertyPath: spawnVector.z
