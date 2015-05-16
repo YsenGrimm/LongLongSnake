@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,6 +14,8 @@ public class MapRenderer : MonoBehaviour
 	public GameObject SnakeBody;
 	public GameObject SnakeHead;
 
+	public GameObject Score;
+
     int[,] Map;
     int WidthTiles;
     int HeightTiles;
@@ -20,6 +23,8 @@ public class MapRenderer : MonoBehaviour
 	int NewSnakeElements;
 
 	bool Dead = false;
+
+	List<SnakeElement> bodyParts;
 
     // Use this for initialization
     void Start()
@@ -54,14 +59,15 @@ public class MapRenderer : MonoBehaviour
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 		};
 
+		bodyParts = FindObjectOfType<SnakeController>().bodyParts;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+		Score.GetComponent<Text>().text = "Score: " + bodyParts.Count;
 
-
-		List<SnakeElement> bodyParts = FindObjectOfType<SnakeController>().bodyParts;
 		//SnakeController.SnakeDirections moveDirection = FindObjectOfType<SnakeController>().getMoveDirection();
 
 		// Collision importand before replace ;)
