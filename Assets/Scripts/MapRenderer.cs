@@ -16,57 +16,41 @@ public class MapRenderer : MonoBehaviour
 
 	public GameObject Score;
 
+	int widthInTiles = 42;
+	int heightInTiles = 24;
+
     int[,] Map;
-    int WidthTiles;
-    int HeightTiles;
-
 	int NewSnakeElements;
-
 	bool Dead = false;
-
 	List<SnakeElement> bodyParts;
 
     // Use this for initialization
     void Start()
-    {
-		WidthTiles = 16;//(int)Mathf.Ceil(Screen.width / 64.0f);
-		HeightTiles = 12;//(int)Mathf.Ceil(Screen.height / 64.0f);
-        
-		Map = new int[,] {
-			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,5,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1},
-			{1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,4,0,0,0,1,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-		};
+    {   
+		Rooms rooms = new Rooms();
+
+		Map = new int[heightInTiles, widthInTiles]; 
+
+		for (int x = 0; x < rooms.MapRoomsTopL[0].GetLength(1); x++)
+		{
+			for (int y = 0; y < rooms.MapRoomsTopL[0].GetLength(0); y++)
+			{
+				Map[y, x] = rooms.MapRoomsTopL[0][y,x];
+				Map[y, x+widthInTiles/2] = rooms.MapRoomsTopR[0][y,x];
+				Map[y+heightInTiles/2, x] = rooms.MapRoomsBotL[0][y,x];
+				Map[y+heightInTiles/2, x+widthInTiles/2] = rooms.MapRoomsBotR[0][y,x];
+			}
+		}
 
 		bodyParts = FindObjectOfType<SnakeController>().bodyParts;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-		Score.GetComponent<Text>().text = "Score: " + bodyParts.Count;
+		if (bodyParts == null) {
+			bodyParts = FindObjectOfType<SnakeController>().bodyParts;
+		}
 
 		//SnakeController.SnakeDirections moveDirection = FindObjectOfType<SnakeController>().getMoveDirection();
 
@@ -109,15 +93,15 @@ public class MapRenderer : MonoBehaviour
 		}
 
 		// attach camera to snake head
-		Camera.main.gameObject.transform.position = new Vector3(bodyParts[0].MapPosition.x - 8, bodyParts[0].MapPosition.y - 6, -10);
+		Camera.main.gameObject.transform.position = new Vector3(bodyParts[0].MapPosition.x, -bodyParts[0].MapPosition.y, -10);
 
 		for (int child = 0; child < MapParent.transform.childCount; child++) {
 			GameObject.Destroy(MapParent.transform.GetChild(child).gameObject);
 		}
 
-		for (int y = 0; y < Map.GetLength(0); y++)
+		for (int x = 0; x < Map.GetLength(1); x++)
 		{
-			for (int x = 0; x < Map.GetLength(1); x++)
+			for (int y = 0; y < Map.GetLength(0); y++)
 			{
 			 	GameObject NewMapElement;
 				GameObject FloorMapElement;
@@ -136,7 +120,7 @@ public class MapRenderer : MonoBehaviour
 					NewMapElement = Instantiate(SnakeHead) as GameObject;
 
 					FloorMapElement = Instantiate(FloorSprite) as GameObject;
-					FloorMapElement.transform.position = new Vector3(x - (WidthTiles/2.0f), y - (HeightTiles/2.0f), 0);
+					FloorMapElement.transform.position = new Vector3(x, -y, 0);
 					FloorMapElement.transform.parent = MapParent.transform;
 					break;
 					// Snake Body
@@ -144,7 +128,7 @@ public class MapRenderer : MonoBehaviour
 					NewMapElement = Instantiate(SnakeBody) as GameObject;
 
 					FloorMapElement = Instantiate(FloorSprite) as GameObject;
-					FloorMapElement.transform.position = new Vector3(x - (WidthTiles/2.0f), y - (HeightTiles/2.0f), 0);
+					FloorMapElement.transform.position = new Vector3(x, -y, 0);
 					FloorMapElement.transform.parent = MapParent.transform;
 					break;
 					// Cherry
@@ -152,7 +136,7 @@ public class MapRenderer : MonoBehaviour
 					NewMapElement = Instantiate(CherrySprite) as GameObject;
 
 					FloorMapElement = Instantiate(FloorSprite) as GameObject;
-					FloorMapElement.transform.position = new Vector3(x - (WidthTiles/2.0f), y - (HeightTiles/2.0f), 0);
+					FloorMapElement.transform.position = new Vector3(x, -y, 0);
 					FloorMapElement.transform.parent = MapParent.transform;
 					break;
 					// Apple
@@ -160,7 +144,7 @@ public class MapRenderer : MonoBehaviour
 					NewMapElement = Instantiate(AppleSprite) as GameObject;
 					
 					FloorMapElement = Instantiate(FloorSprite) as GameObject;
-					FloorMapElement.transform.position = new Vector3(x - (WidthTiles/2.0f), y - (HeightTiles/2.0f), 0);
+					FloorMapElement.transform.position = new Vector3(x, -y, 0);
 					FloorMapElement.transform.parent = MapParent.transform;
 					break;
 				default:
@@ -168,7 +152,7 @@ public class MapRenderer : MonoBehaviour
 					break;
 				}
 
-				NewMapElement.transform.position = new Vector3(x - (WidthTiles/2.0f), y - (HeightTiles/2.0f), -1);
+				NewMapElement.transform.position = new Vector3(x, -y, -1);
 				NewMapElement.transform.parent = MapParent.transform;
 
 				if (Map[y,x] == 2 || Map[y,x] == 3) {
@@ -176,5 +160,7 @@ public class MapRenderer : MonoBehaviour
 				}
 			}
 		}
+
+		Score.GetComponent<Text>().text = "Score: " + bodyParts.Count;
     }
 }

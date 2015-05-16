@@ -49,10 +49,10 @@ public class SnakeController : MonoBehaviour
         bodyParts.Add(SnakeHead);
 
         // create first bodypart and add it to list
-		SnakeElement bodyPart0 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y+1, spawnVector.z));
+		SnakeElement bodyPart0 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y-1, spawnVector.z));
         bodyParts.Add(bodyPart0);
 
-		SnakeElement bodyPart1 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y+1, spawnVector.z));
+		SnakeElement bodyPart1 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y-1, spawnVector.z));
         bodyParts.Add(bodyPart1);
     }
 
@@ -77,7 +77,7 @@ public class SnakeController : MonoBehaviour
                     }
 
                     // update head
-                    bodyParts[0].MapPosition += new Vector3(0, -1f);
+                    bodyParts[0].MapPosition += new Vector3(0, 1f);
                     break;
 
                 case SnakeDirections.Up:
@@ -88,7 +88,7 @@ public class SnakeController : MonoBehaviour
                     }
 
                     // update head
-                    bodyParts[0].MapPosition += new Vector3(0, 1f);
+                    bodyParts[0].MapPosition += new Vector3(0, -1f);
                     break;
 
                 case SnakeDirections.Right:
