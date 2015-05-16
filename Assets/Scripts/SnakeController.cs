@@ -14,7 +14,7 @@ public class SnakeController : MonoBehaviour
     }
 
     Vector2 position;
-    List<SnakeElement> bodyParts;
+    public List<SnakeElement> bodyParts;
 
     // placeholder value for length, might be replaced by bodyParts.Length
     SnakeDirections moveDirection;

@@ -17,6 +17,8 @@ public class MapRenderer : MonoBehaviour
     int WidthTiles;
     int HeightTiles;
 
+	int NewSnakeElements;
+
 	bool Dead = false;
 
     // Use this for initialization
@@ -59,7 +61,7 @@ public class MapRenderer : MonoBehaviour
     {
 
 
-		List<SnakeElement> bodyParts = FindObjectOfType<SnakeController>().getBodyParts();
+		List<SnakeElement> bodyParts = FindObjectOfType<SnakeController>().bodyParts;
 		//SnakeController.SnakeDirections moveDirection = FindObjectOfType<SnakeController>().getMoveDirection();
 
 		// Collision importand before replace ;)
@@ -67,21 +69,36 @@ public class MapRenderer : MonoBehaviour
 			Dead = true;
 		}
 
+		// collision with cherries
+		if (Map[(int)bodyParts[0].MapPosition.y, (int)bodyParts[0].MapPosition.x] == 3) {
+			NewSnakeElements += 5;
+		}
+
+		//collision with apple
+		if (Map[(int)bodyParts[0].MapPosition.y, (int)bodyParts[0].MapPosition.x] == 4) {
+			NewSnakeElements += 15;
+		}
+
+		while (NewSnakeElements > 0) {
+			bodyParts.Add(new SnakeElement(new Vector3(bodyParts[0].MapPosition.x, bodyParts[0].MapPosition.y, -2)));
+			NewSnakeElements--;
+		}
+
+		// reset level on death
 		if (Dead) {
 			Application.LoadLevel("Home");
 		}
 
-		// replace for snake draw
+		// draw snake only when not dead because better looks
 		if (!Dead) {
 			foreach (var snakeElem in bodyParts) {
 				Map[(int)snakeElem.MapPosition.y, (int)snakeElem.MapPosition.x] = 2;
 			}
 		}
 
+		// attach camera to snake head
 		Camera.main.gameObject.transform.position = new Vector3(bodyParts[0].MapPosition.x - 8, bodyParts[0].MapPosition.y - 6, -10);
 
-
-		
 		for (int child = 0; child < MapParent.transform.childCount; child++) {
 			GameObject.Destroy(MapParent.transform.GetChild(child).gameObject);
 		}
