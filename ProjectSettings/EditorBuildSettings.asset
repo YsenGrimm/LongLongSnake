@@ -6,6 +6,4 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FancyMenu.unity
-  - enabled: 1
-    path: Assets/Scenes/FancyControls.unity
+    path: Assets/Scenes/Home.unity

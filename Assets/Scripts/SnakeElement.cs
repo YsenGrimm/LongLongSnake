@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SnakeElement : MonoBehaviour {
+public class SnakeElement {
 
-	// Use this for initialization
-	void Start () {
+	public Vector3 MapPosition { get; set; } 
+	
+	public SnakeElement(Vector3 mapPosition) {
+		this.MapPosition = mapPosition;
+	}
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
