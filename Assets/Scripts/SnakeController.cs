@@ -51,6 +51,7 @@ public class SnakeController : MonoBehaviour
         bodyParts.Add(bodyPart1);
     }
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -137,6 +138,25 @@ public class SnakeController : MonoBehaviour
                 moveDirection = directions.up;
             }
         }
+
+    }
+
+    public void Move(int toDirection)
+    {
+        switch (toDirection)
+        {
+            case 0:     // up
+                break;
+            case 1:     // down
+                break;
+            case 2:     // right
+                moveDirection = directions.right;
+                break;
+            case 3:     // left
+                moveDirection = directions.left;
+                break;
+        }
+
 
     }
 }
