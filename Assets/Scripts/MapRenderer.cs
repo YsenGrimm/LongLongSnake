@@ -39,7 +39,7 @@ public class MapRenderer : MonoBehaviour
             for (int y = 0; y < Map.GetLength(1); y++)
             {
                 GameObject temp = Instantiate(floorSprite) as GameObject;
-                temp.transform.position = new Vector3(x * 32, y * 32);
+                temp.transform.position = new Vector3(x, y);
                 Debug.Log("position: " + x.ToString() + ", " + y.ToString());
             }
         }
