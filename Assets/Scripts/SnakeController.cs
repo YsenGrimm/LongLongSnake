@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SnakeController : MonoBehaviour
 {
 
-    enum SnakeDirections
+    public enum SnakeDirections
     {
         Up,
         Down,
@@ -29,6 +29,10 @@ public class SnakeController : MonoBehaviour
 
 	public List<SnakeElement> getBodyParts() {
 		return bodyParts;
+	}
+
+	public SnakeDirections getMoveDirection() {
+		return moveDirection;
 	}
 
     // Use this for initialization

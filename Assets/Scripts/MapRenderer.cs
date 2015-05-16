@@ -17,6 +17,8 @@ public class MapRenderer : MonoBehaviour
     int WidthTiles;
     int HeightTiles;
 
+	bool Dead = false;
+
     // Use this for initialization
     void Start()
     {
@@ -55,36 +57,28 @@ public class MapRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-//		if (Input.GetKeyUp(KeyCode.W)) {
-//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x, 
-//			                                                        Camera.main.gameObject.transform.position.y + 12, 
-//			                                                        Camera.main.gameObject.transform.position.z);
-//		}
-//		if (Input.GetKeyUp(KeyCode.A)) {
-//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - 24, 
-//			                                                        Camera.main.gameObject.transform.position.y, 
-//			                                                        Camera.main.gameObject.transform.position.z);
-//		}
-//		if (Input.GetKeyUp(KeyCode.S)) {
-//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x, 
-//			                                                        Camera.main.gameObject.transform.position.y - 12, 
-//			                                                        Camera.main.gameObject.transform.position.z);
-//		}
-//		if (Input.GetKeyUp(KeyCode.D)) {
-//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x + 24, 
-//			                                                        Camera.main.gameObject.transform.position.y, 
-//			                                                        Camera.main.gameObject.transform.position.z);
-//		}
 
-	
-		List<SnakeElement> bodyParts = new List<SnakeElement>();
-		bodyParts = FindObjectOfType<SnakeController>().getBodyParts();
-		foreach (var snakeElem in bodyParts) {
-			Map[(int)snakeElem.MapPosition.y, (int)snakeElem.MapPosition.x] = 2;
+
+		List<SnakeElement> bodyParts = FindObjectOfType<SnakeController>().getBodyParts();
+		//SnakeController.SnakeDirections moveDirection = FindObjectOfType<SnakeController>().getMoveDirection();
+
+		// Collision importand before replace ;)
+		if (Map[(int)bodyParts[0].MapPosition.y, (int)bodyParts[0].MapPosition.x] == 1) {
+			Dead = true;
 		}
 
-		Camera.main.gameObject.transform.position = new Vector3(bodyParts[0].MapPosition.x - 8, 
-		                                                        bodyParts[0].MapPosition.y - 6, -10);
+		if (Dead) {
+			Application.LoadLevel("Home");
+		}
+
+		// replace for snake draw
+		if (!Dead) {
+			foreach (var snakeElem in bodyParts) {
+				Map[(int)snakeElem.MapPosition.y, (int)snakeElem.MapPosition.x] = 2;
+			}
+		}
+
+		Camera.main.gameObject.transform.position = new Vector3(bodyParts[0].MapPosition.x - 8, bodyParts[0].MapPosition.y - 6, -10);
 
 
 		
