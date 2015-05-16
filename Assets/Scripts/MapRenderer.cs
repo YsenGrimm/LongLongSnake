@@ -10,6 +10,8 @@ public class MapRenderer : MonoBehaviour
 	public GameObject MapParent;
 	public GameObject CherrySprite;
 	public GameObject AppleSprite;
+	public GameObject SnakeBody;
+	//public GameObject SnakeHead;
 
     int[,] Map;
     int WidthTiles;
@@ -53,26 +55,38 @@ public class MapRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyUp(KeyCode.W)) {
-			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x, 
-			                                                        Camera.main.gameObject.transform.position.y + 12, 
-			                                                        Camera.main.gameObject.transform.position.z);
+//		if (Input.GetKeyUp(KeyCode.W)) {
+//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x, 
+//			                                                        Camera.main.gameObject.transform.position.y + 12, 
+//			                                                        Camera.main.gameObject.transform.position.z);
+//		}
+//		if (Input.GetKeyUp(KeyCode.A)) {
+//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - 24, 
+//			                                                        Camera.main.gameObject.transform.position.y, 
+//			                                                        Camera.main.gameObject.transform.position.z);
+//		}
+//		if (Input.GetKeyUp(KeyCode.S)) {
+//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x, 
+//			                                                        Camera.main.gameObject.transform.position.y - 12, 
+//			                                                        Camera.main.gameObject.transform.position.z);
+//		}
+//		if (Input.GetKeyUp(KeyCode.D)) {
+//			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x + 24, 
+//			                                                        Camera.main.gameObject.transform.position.y, 
+//			                                                        Camera.main.gameObject.transform.position.z);
+//		}
+
+	
+		List<SnakeElement> bodyParts = new List<SnakeElement>();
+		bodyParts = FindObjectOfType<SnakeController>().getBodyParts();
+		foreach (var snakeElem in bodyParts) {
+			Map[(int)snakeElem.MapPosition.y, (int)snakeElem.MapPosition.x] = 2;
 		}
-		if (Input.GetKeyUp(KeyCode.A)) {
-			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - 24, 
-			                                                        Camera.main.gameObject.transform.position.y, 
-			                                                        Camera.main.gameObject.transform.position.z);
-		}
-		if (Input.GetKeyUp(KeyCode.S)) {
-			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x, 
-			                                                        Camera.main.gameObject.transform.position.y - 12, 
-			                                                        Camera.main.gameObject.transform.position.z);
-		}
-		if (Input.GetKeyUp(KeyCode.D)) {
-			Camera.main.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x + 24, 
-			                                                        Camera.main.gameObject.transform.position.y, 
-			                                                        Camera.main.gameObject.transform.position.z);
-		}
+
+		Camera.main.gameObject.transform.position = new Vector3(bodyParts[0].MapPosition.x - 8, 
+		                                                        bodyParts[0].MapPosition.y - 6, -10);
+
+
 		
 		for (int child = 0; child < MapParent.transform.childCount; child++) {
 			GameObject.Destroy(MapParent.transform.GetChild(child).gameObject);
@@ -93,7 +107,7 @@ public class MapRenderer : MonoBehaviour
 					NewMapElement = Instantiate(WallSprite) as GameObject;
 					break;
 				case 2:
-					NewMapElement = Instantiate(FloorSprite) as GameObject;
+					NewMapElement = Instantiate(SnakeBody) as GameObject;
 
 					FloorMapElement = Instantiate(FloorSprite) as GameObject;
 					FloorMapElement.transform.position = new Vector3(x - (WidthTiles/2.0f), y - (HeightTiles/2.0f), 0);
@@ -120,6 +134,10 @@ public class MapRenderer : MonoBehaviour
 
 				NewMapElement.transform.position = new Vector3(x - (WidthTiles/2.0f), y - (HeightTiles/2.0f), -1);
 				NewMapElement.transform.parent = MapParent.transform;
+
+				if (Map[y,x] == 2) {
+					Map[y,x] = 0;
+				}
 			}
 		}
     }
