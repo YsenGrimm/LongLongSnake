@@ -155,7 +155,7 @@ public class MapRenderer : MonoBehaviour
             //collision with apple
             if (Map[(int)bodyParts[0].MapPosition.y, (int)bodyParts[0].MapPosition.x] == 5)
             {
-                NewSnakeElements += 15;
+                NewSnakeElements += 10;
 				FruitCounter--;
 				foreach (var fruit in new List<Fruit>(FruitList)) {
 					if (new Vector3(fruit.fruitPos.x, fruit.fruitPos.y, bodyParts[0].MapPosition.z) == bodyParts[0].MapPosition) {
@@ -258,7 +258,7 @@ public class MapRenderer : MonoBehaviour
                 }
             }
 
-            Score.GetComponent<Text>().text = "Score: " + bodyParts.Count;
+            
         }
         else
         {
@@ -266,6 +266,7 @@ public class MapRenderer : MonoBehaviour
             if (!menuShown)
             {
                 gameOverMenu = Instantiate(gameOverMenu) as GameObject;
+				GameObject.Find("Score").GetComponent<Text>().text = "Score: " + bodyParts.Count;
                 menuShown = true;
             }
         }

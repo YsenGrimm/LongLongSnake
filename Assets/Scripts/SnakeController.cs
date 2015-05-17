@@ -122,7 +122,7 @@ public class SnakeController : MonoBehaviour
 
             timerInSeconds = timerDefault;
 
-			Speed = Mathf.Lerp(StartSpeed, MaxSpeed, bodyParts.Count / 100.0f);
+			Speed = Mathf.Lerp(StartSpeed, MaxSpeed, bodyParts.Count / 200.0f);
 
         }
         #endregion
