@@ -265,7 +265,8 @@ public class MapRenderer : MonoBehaviour
             //print(gameOverMenu == null);
             if (!menuShown)
             {
-                gameOverMenu = Instantiate(gameOverMenu) as GameObject;
+				gameOverMenu.SetActive(true);
+				//GameObject.Find("GameOverScreen").SetActive(true);
 				GameObject.Find("Score").GetComponent<Text>().text = "Score: " + bodyParts.Count;
                 menuShown = true;
             }
