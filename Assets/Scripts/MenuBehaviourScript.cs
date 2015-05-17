@@ -23,8 +23,6 @@ public class MenuBehaviourScript : MonoBehaviour {
 
     public void End()
     {
-        //if (Application.isEditor)
-        //    UnityEditor.EditorApplication.Exit(0);
 
         Application.Quit();
     }
