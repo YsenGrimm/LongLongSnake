@@ -87,6 +87,33 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &198647688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 198647689}
+  m_Layer: 0
+  m_Name: MapStatic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &198647689
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 198647688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.06149483, y: -6.66245604, z: 3.31445312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1 &216405472
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,12 +377,31 @@ MonoBehaviour:
   FloorSprite: {fileID: 180692, guid: 440f37f8ddc6743babb2fd6f4e5f1968, type: 2}
   WallSprite: {fileID: 197104, guid: 38e4b4a2e5b8c4a57bfcea4c0a376e56, type: 2}
   MapParent: {fileID: 1867166249}
+  MapParentStatic: {fileID: 198647688}
   CherrySprite: {fileID: 174996, guid: 961f8e444814e49bab2b2e4ed6e91271, type: 2}
   AppleSprite: {fileID: 170582, guid: 2ed4e47efee0a4766af7ed5c05c2a01d, type: 2}
   SnakeBody: {fileID: 196154, guid: 75256e27cb72e7f49b9349abbab62780, type: 2}
   SnakeHead: {fileID: 193734, guid: 69a2fec62a04fad469efacde19740c1b, type: 2}
   Score: {fileID: 216405472}
   gameOverMenu: {fileID: 198276, guid: 3ae0f68d7f133ec488e5d89d06dd9ca0, type: 2}
+  FruitsInMap: 10
+  CameraFollowDistance: 4
+  CameraNearDistance: 1
+  CameraCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!4 &864865098
 Transform:
   m_ObjectHideFlags: 0
