@@ -3,6 +3,9 @@ using System.Collections;
 
 public class MenuBehaviourScript : MonoBehaviour {
 
+    string menuLevelName = "FancyMenu";
+    string firstLevelName = "Home";
+
 	// Use this for initialization
 	void Start () {
 	
@@ -15,14 +18,24 @@ public class MenuBehaviourScript : MonoBehaviour {
 
     public void StartGame()
     {
-        Application.LoadLevel("FancyControls");
+        Application.LoadLevel(firstLevelName);
     }
 
     public void End()
     {
-        if (Application.isEditor)
-            UnityEditor.EditorApplication.Exit(0);
+        //if (Application.isEditor)
+        //    UnityEditor.EditorApplication.Exit(0);
 
         Application.Quit();
+    }
+
+    public void MainMenu()
+    {
+        Application.LoadLevel(menuLevelName);
+    }
+
+    public void RetryLevel()
+    {
+        Application.LoadLevel(firstLevelName);
     }
 }

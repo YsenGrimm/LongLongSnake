@@ -30,7 +30,7 @@ public class SnakeController : MonoBehaviour
 
     public Vector3 spawnVector;
     public float speed;
-    public float timerInSeconds = 1;
+    public float timerInSeconds = 0.5f;
     public float boostInterval = 50;
 
     public List<SnakeElement> getBodyParts()
@@ -207,7 +207,5 @@ public class SnakeController : MonoBehaviour
                 moveDirection = SnakeDirections.Left;
                 break;
         }
-
-
     }
 }
