@@ -208,7 +208,6 @@ public class MapRenderer : MonoBehaviour
 				Vector2 newCameraPos = Vector2.Lerp(oldCameraPos, playerPos, CameraCurve.Evaluate(evalCameraPathAt));
 				Camera.main.gameObject.transform.position = new Vector3(newCameraPos.x, -newCameraPos.y, Camera.main.transform.position.z);
 			}
-			print(oldCameraPos + "  " + bodyParts[0].MapPosition);
 
 			// cleanup draw list
             for (int child = 0; child < MapParent.transform.childCount; child++)

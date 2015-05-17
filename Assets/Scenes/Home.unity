@@ -385,8 +385,8 @@ MonoBehaviour:
   Score: {fileID: 216405472}
   gameOverMenu: {fileID: 198276, guid: 3ae0f68d7f133ec488e5d89d06dd9ca0, type: 2}
   FruitsInMap: 10
-  CameraFollowDistance: 4
-  CameraNearDistance: 1
+  CameraFollowDistance: 0
+  CameraNearDistance: 0
   CameraCurve:
     serializedVersion: 2
     m_Curve:
@@ -396,9 +396,9 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: 1.5
-      inSlope: 0
-      outSlope: 0
+      value: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -467,6 +467,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11405880, guid: 14120c70b38304061acbc0b0d6762487, type: 2}
       propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405880, guid: 14120c70b38304061acbc0b0d6762487, type: 2}
+      propertyPath: MaxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405880, guid: 14120c70b38304061acbc0b0d6762487, type: 2}
+      propertyPath: Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405880, guid: 14120c70b38304061acbc0b0d6762487, type: 2}
+      propertyPath: StartSpeed
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
