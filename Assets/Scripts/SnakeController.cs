@@ -13,30 +13,19 @@ public class SnakeController : MonoBehaviour
         Left
     }
 
-    Vector2 position;
-    public List<SnakeElement> bodyParts;
-
-    SnakeDirections moveDirection;
-    float timerDefault;
-    SnakeElement SnakeHead;
-
-    public Vector3 spawnVector;
+    public Vector3 SpawnPosition;
     public float Speed;
 	public float StartSpeed;
 	public float MaxSpeed;
 
-    public float timerInSeconds = 1f;
-    public float boostInterval = 50;
+	[System.NonSerialized]
+	public List<SnakeElement> bodyParts;
 
-    public List<SnakeElement> getBodyParts()
-    {
-        return bodyParts;
-    }
+	float timerInSeconds = 1f;
 
-    public SnakeDirections getMoveDirection()
-    {
-        return moveDirection;
-    }
+	SnakeDirections moveDirection;
+	float timerDefault;
+	SnakeElement SnakeHead;
 
     // Use this for initialization
     void Start()
@@ -48,27 +37,23 @@ public class SnakeController : MonoBehaviour
         bodyParts = new List<SnakeElement>();
 
         // spawn head in center of maps
-        SnakeHead = new SnakeElement(spawnVector);
+        SnakeHead = new SnakeElement(SpawnPosition);
         bodyParts.Add(SnakeHead);
 
         // create first bodypart and add it to list
-        SnakeElement bodyPart0 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y - 1, spawnVector.z));
+        SnakeElement bodyPart0 = new SnakeElement(new Vector3(SpawnPosition.x, SpawnPosition.y - 1, SpawnPosition.z));
         bodyParts.Add(bodyPart0);
 
-        SnakeElement bodyPart1 = new SnakeElement(new Vector3(spawnVector.x, spawnVector.y - 1, spawnVector.z));
-
+        SnakeElement bodyPart1 = new SnakeElement(new Vector3(SpawnPosition.x, SpawnPosition.y - 1, SpawnPosition.z));
         bodyParts.Add(bodyPart1);
     }
-
-
-    // Update is called once per frame
+		
     void Update()
     {
         // capture time
         timerInSeconds -= Time.deltaTime * Speed;
 
         // check, if timespan has passed
-        #region Move snake
         if (timerInSeconds <= 0)
         {
             // move snake to new direction
@@ -125,7 +110,6 @@ public class SnakeController : MonoBehaviour
 			Speed = Mathf.Lerp(StartSpeed, MaxSpeed, bodyParts.Count / 200.0f);
 
         }
-        #endregion
 
         // fetch keyboard input
         if (Input.GetAxis("Horizontal") != 0)
@@ -171,4 +155,14 @@ public class SnakeController : MonoBehaviour
                 break;
         }
     }
+
+	public List<SnakeElement> getBodyParts()
+	{
+		return bodyParts;
+	}
+
+	public SnakeDirections getMoveDirection()
+	{
+		return moveDirection;
+	}
 }

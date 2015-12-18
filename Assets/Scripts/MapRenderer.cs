@@ -5,42 +5,36 @@ using System.Collections.Generic;
 
 public class MapRenderer : MonoBehaviour
 {
-
+	[Header("Map Parts")]
     public GameObject FloorSprite;
     public GameObject WallSprite;
     public GameObject MapParent;
 	public GameObject MapParentStatic;
+	[Header("Snake Parts")]
+	public GameObject SnakeBody;
+	public GameObject SnakeHead;
+	[Header("Fruits")]
     public GameObject CherrySprite;
     public GameObject AppleSprite;
-    public GameObject SnakeBody;
-    public GameObject SnakeHead;
-
-    public GameObject Score;
-    public GameObject gameOverMenu;
 
 	public int FruitsInMap = 10;
-
-	public float CameraFollowDistance;
-	public float CameraNearDistance;
-	public AnimationCurve CameraCurve;
-
-	float cameraSteps = 0.01f;
-	float evalCameraPathAt = 0.0f;
-	bool moveCamera = false;
 
     int widthInTiles = 42;
     int heightInTiles = 24;
 
     int[,] Map;
+
     int NewSnakeElements;
-    bool Dead = false;
-    bool menuShown = false;
     List<SnakeElement> bodyParts;
 
 	List<Fruit> FruitList;
 	int FruitCounter;
 
-    // Use this for initialization
+	bool Dead = false;
+	bool menuShown = false;
+
+	Camera theCam;
+
     void Start()
     {
 		// Map generation
@@ -60,7 +54,7 @@ public class MapRenderer : MonoBehaviour
 		// Random Fruits
 		Random.seed = 1337;
 
-		FruitList = new List<Fruit>() {};
+		FruitList = new List<Fruit> ();
 
 		for (int i = 0; i < FruitsInMap; i++) {
 			Vector2 fruitPos;
@@ -80,17 +74,17 @@ public class MapRenderer : MonoBehaviour
 				switch (Map[y, x])
 				{
 					// Ground
-				case 0:
-					NewMapElement = Instantiate(FloorSprite) as GameObject;
-					break;
+					case 0:
+						NewMapElement = Instantiate(FloorSprite) as GameObject;
+						break;
 					// Wall
-				case 1:
-					NewMapElement = Instantiate(WallSprite) as GameObject;
-					break;
+					case 1:
+						NewMapElement = Instantiate(WallSprite) as GameObject;
+						break;
 					// Snake Head
-				default:
-					NewMapElement = Instantiate(FloorSprite) as GameObject;
-					break;
+					default:
+						NewMapElement = Instantiate(FloorSprite) as GameObject;
+						break;
 				}
 				
 				NewMapElement.transform.position = new Vector3(x, -y, -1);
@@ -99,9 +93,10 @@ public class MapRenderer : MonoBehaviour
 		}
 
         bodyParts = FindObjectOfType<SnakeController>().bodyParts;
-    }
 
-    // Update is called once per frame
+		theCam = Camera.main;
+    }
+		
     void Update()
     {
         if (bodyParts == null)
@@ -111,7 +106,6 @@ public class MapRenderer : MonoBehaviour
 	
         if (!Dead)
         {
-
 			//Decay Fruits
 			if (FruitList.Count > 0) {
 				foreach (var fruit in new List<Fruit>(FruitList)) {
@@ -193,21 +187,7 @@ public class MapRenderer : MonoBehaviour
             }
 
             // attach camera to snake head
-			Vector2 oldCameraPos = new Vector2(Camera.main.transform.position.x, -Camera.main.transform.position.y);
-			Vector2 playerPos = bodyParts[0].MapPosition;
-
-			if (Vector3.Distance(oldCameraPos, playerPos) > CameraFollowDistance) {
-				moveCamera = true;
-			} else if (Vector3.Distance(oldCameraPos, playerPos) < CameraNearDistance) {
-				moveCamera = false;
-				evalCameraPathAt = 0.0f;
-			}
-
-			if (moveCamera) {
-				evalCameraPathAt += cameraSteps;
-				Vector2 newCameraPos = Vector2.Lerp(oldCameraPos, playerPos, CameraCurve.Evaluate(evalCameraPathAt));
-				Camera.main.gameObject.transform.position = new Vector3(newCameraPos.x, -newCameraPos.y, Camera.main.transform.position.z);
-			}
+			theCam.transform.position = new Vector3(bodyParts[0].MapPosition.x, -bodyParts[0].MapPosition.y, theCam.transform.position.z);
 
 			// cleanup draw list
             for (int child = 0; child < MapParent.transform.childCount; child++)
@@ -259,17 +239,6 @@ public class MapRenderer : MonoBehaviour
             }
 
             
-        }
-        else
-        {
-            //print(gameOverMenu == null);
-            if (!menuShown)
-            {
-				gameOverMenu.SetActive(true);
-				//GameObject.Find("GameOverScreen").SetActive(true);
-				GameObject.Find("Score").GetComponent<Text>().text = "Score: " + bodyParts.Count;
-                menuShown = true;
-            }
         }
     }
 
