@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 public class MapRenderer : MonoBehaviour
 {
+	public enum ElementType
+	{
+		Floor,
+		Wall,
+		Fruit,
+		Snake
+	}
+
 	[Header("Map Parts")]
     public GameObject FloorSprite;
     public GameObject WallSprite;
@@ -31,7 +37,6 @@ public class MapRenderer : MonoBehaviour
 	int FruitCounter;
 
 	bool Dead = false;
-	bool menuShown = false;
 
 	Camera theCam;
 
@@ -52,15 +57,15 @@ public class MapRenderer : MonoBehaviour
         }
 
 		// Random Fruits
-		Random.seed = 1337;
+		Random.InitState(1337);
 
 		FruitList = new List<Fruit> ();
 
 		for (int i = 0; i < FruitsInMap; i++) {
-			Vector2 fruitPos;
-			do {
+			Vector2 fruitPos = Vector2.zero;
+			while (Map[(int)fruitPos.y, (int)fruitPos.x] == 1) {
 				fruitPos = new Vector2(Random.value*widthInTiles, Random.value*heightInTiles);
-			} while (Map[(int)fruitPos.y, (int)fruitPos.x] == 1);
+			}
 			FruitList.Add(new Fruit(randomFruitType(Random.value), fruitPos, Random.value * 0.01f));
 			FruitCounter++;
 		}
@@ -81,7 +86,7 @@ public class MapRenderer : MonoBehaviour
 					case 1:
 						NewMapElement = Instantiate(WallSprite) as GameObject;
 						break;
-					// Snake Head
+					
 					default:
 						NewMapElement = Instantiate(FloorSprite) as GameObject;
 						break;
