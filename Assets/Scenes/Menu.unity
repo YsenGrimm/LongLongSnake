@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 289071728}
   - component: {fileID: 289071727}
   - component: {fileID: 289071726}
+  - component: {fileID: 289071730}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -210,9 +211,20 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 230, y: 100}
+  m_AnchoredPosition: {x: 0, y: -300}
+  m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &289071730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 289071725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac53d7d253de4600a1f75d4e2730ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &324572050
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +236,7 @@ GameObject:
   - component: {fileID: 324572055}
   - component: {fileID: 324572054}
   - component: {fileID: 324572053}
+  - component: {fileID: 324572052}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -247,9 +260,20 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 230, y: 100}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &324572052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 324572050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac53d7d253de4600a1f75d4e2730ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &324572053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -478,11 +502,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 68b480648f430bb46b2ace1582c8849f, type: 3}
-    m_FontSize: 35
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -523,6 +547,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22ccdc5919c91b4a972afead1097e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimatedButtons:
+  - {fileID: 324572052}
+  - {fileID: 289071730}
 --- !u!4 &641898617
 Transform:
   m_ObjectHideFlags: 0
@@ -665,7 +692,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A game by YsenGrimm and MWehrstedt
+  m_Text: A game by @YsenGrimm and @MWehrstedt
 --- !u!222 &1158915905
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -953,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -962,11 +989,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 68b480648f430bb46b2ace1582c8849f, type: 3}
-    m_FontSize: 35
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 8
+    m_MaxSize: 80
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
