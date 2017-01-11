@@ -2,42 +2,31 @@
 
 public class Fruit {
 
-	public enum FruitType {
-		Cherry,
-		Apple,
-
-		length
-	}
-
 	public Vector2 fruitPos;
-	FruitType type;
+	public MapRenderer.ElementType type;
 
 	float livetime;
 	float decaySpeed;
 
 	bool alive;
 
-	public int FruitTypeInt;
-
-	public Fruit(FruitType type, Vector2 pos, float decay) {
-		this.fruitPos = pos;
+	public Fruit(MapRenderer.ElementType type, Vector2 pos, float decay) {
+		fruitPos = pos;
 		this.type = type;
-		this.alive = true;
+		alive = true;
 
-		this.decaySpeed = decay;
+		decaySpeed = decay;
 
-		switch (this.type) {
-		case Fruit.FruitType.Cherry:
-			this.livetime = 10;
-			this.FruitTypeInt = 4;
-			break;
-		case Fruit.FruitType.Apple:
-			this.livetime = 20;
-			this.FruitTypeInt = 5;
-			break;
-		default:
-			this.livetime = 10;
-			break;
+		switch (type) {
+			case MapRenderer.ElementType.Cherry:
+				livetime = 10;
+				break;
+			case MapRenderer.ElementType.Apple:
+				livetime = 20;
+				break;
+			default:
+				livetime = 10;
+				break;
 		}
 	}
 
@@ -51,6 +40,6 @@ public class Fruit {
 	}
 
 	public bool Alive() {
-		return this.alive;
+		return alive;
 	}
 }

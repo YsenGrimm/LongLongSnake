@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 public class Rooms {
 
 	//		Map = new int[,] {
@@ -29,16 +28,12 @@ public class Rooms {
 	//			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	//		};
 
-	public List<int[,]> MapRoomsTopR;
-	public List<int[,]> MapRoomsTopL;
-	public List<int[,]> MapRoomsBotR;
-	public List<int[,]> MapRoomsBotL;
+	public MapRenderer.ElementType[,] MapRoomsTopR;
+	public MapRenderer.ElementType[,] MapRoomsTopL;
+	public MapRenderer.ElementType[,] MapRoomsBotR;
+	public MapRenderer.ElementType[,] MapRoomsBotL;
 
 	public Rooms() {
-		MapRoomsTopR = new List<int[,]>();
-		MapRoomsTopL = new List<int[,]>();
-		MapRoomsBotR = new List<int[,]>();
-		MapRoomsBotL = new List<int[,]>();
 
 		int[,] Room1TL = new int[,] {
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
@@ -146,10 +141,28 @@ public class Rooms {
 //            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
 //        };
 
+		MapRoomsTopR = changeTypes(Room1TR);
+		MapRoomsTopL = changeTypes(Room1TL);
+		MapRoomsBotR = changeTypes(Room1BR);
+		MapRoomsBotL = changeTypes(Room1BL);
+	}
 
-        this.MapRoomsTopL.Add(Room1TL);
-		this.MapRoomsTopR.Add(Room1TR);
-		this.MapRoomsBotL.Add(Room1BL);
-		this.MapRoomsBotR.Add(Room1BR);
+	MapRenderer.ElementType[,] changeTypes(int[,] room) {
+		MapRenderer.ElementType[,] retRoom = new MapRenderer.ElementType[room.GetLength(0), room.GetLength(1)];
+
+		for (int x = 0; x < room.GetLength(0); x++) {
+			for (int y = 0; y < room.GetLength(1); y++) {
+				switch (room[x, y]) {
+					case 0:
+						retRoom[x, y] = MapRenderer.ElementType.Floor;
+						break;
+					case 1:
+						retRoom[x, y] = MapRenderer.ElementType.Wall;
+						break;
+				}
+			}
+		}
+
+		return retRoom;
 	}
 }
